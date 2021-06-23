@@ -1,25 +1,102 @@
-import React from 'react';
-import { useFormContext, Controller } from 'react-hook-form';
-import { TextField, Grid } from '@material-ui/core';
+import React, { Component, useState } from "react";
+import { Redirect } from "react-router";
+import { TextField, Button, Container } from "@material-ui/core";
+import { Link } from "react-router-dom";
+// import cookie from "cookie";
+// import HandleLogin from "./HandleLogin";
+
+class FormInput extends Component {
+  state = {
+    firstName: "",
+    lastName: "",
+    address: "",
+    email: "",
+    city: "",
+    zip: "",
+  };
+
+  handleTextChange = (e) => {
+    const state = { ...this.state };
+    state[e.target.name] = e.target.value;
+    this.setState(state);
+  };
 
 
-function FormInput ({ name, label, required }) {
-  const { control } = useFormContext();
-  const isError = false;
+  render() {
+    
+    return (
+      <div className="auth-wrapper">
+        <div className="auth-inner">
+          <Container>
+            <form>
 
-  return (
-    <Grid item xs={12} sm={6}>
-      <Controller
-        as={TextField}
-        name={name}
-        control={control}
-        label={label}
-        fullWidth
-        required={required}
-        error={isError}
-      />
-    </Grid>
-  );
+              <TextField
+                variant="outlined"
+                fullWidth="700"
+                required
+                onChange={this.handleTextChange}
+                value={this.state.firstName}
+                name="firstName"
+                label="First Name"
+                type="text"
+              />
+
+              <TextField
+                variant="outlined"
+                fullWidth="700"
+                required
+                onChange={this.handleTextChange}
+                value={this.state.lastName}
+                name="lastName"
+                label="Last Name"
+                type="text"
+              />
+              <TextField
+                variant="outlined"
+                fullWidth="700px"
+                required
+                onChange={this.handleTextChange}
+                value={this.state.address}
+                name="address"
+                label="Address"
+                type="text"
+              />
+              <TextField
+                variant="outlined"
+                fullWidth="700px"
+                required
+                onChange={this.handleTextChange}
+                value={this.state.email}
+                name="email"
+                label="Email"
+                type="text"
+              />
+              <TextField
+                variant="outlined"
+                fullWidth="700px"
+                required
+                onChange={this.handleTextChange}
+                value={this.state.city}
+                name="city"
+                label="City"
+                type="text"
+              />
+              <TextField
+                variant="outlined"
+                fullWidth="700px"
+                required
+                onChange={this.handleTextChange}
+                value={this.state.zip}
+                name="zip"
+                label="ZIP / Postal Code"
+                type="text"
+              />
+            </form>
+          </Container>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default FormInput;
